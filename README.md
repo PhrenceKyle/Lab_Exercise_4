@@ -608,11 +608,22 @@ When physical hardware is returned to the counter:
 - **Expected Behavior**: Every sensitive event generates a timestamped log containing user, action, module, record ID, and description.
 - **Example**: Maria Santos approves `LAP-001`. Audit record `APPROVED | Borrowing | Approved borrowing request for LAP-001` is created.
 
-lab_4/screenshots/admin-dashboard.png
-lab_4/screenshots/audit-log.png
-lab_4/screenshots/test-results.png[View Screenshot](../screenshots/test-results.png)
-![Test Results](../screenshots/test-results.png)
-<img src="../screenshots/test-results.png" alt="Test results">
+
+## 🖼️ Screenshots
+
+### Administrator Dashboard
+
+![Administrator Dashboard](lab_4/screenshots/admin-dashboard.png)
+
+### Audit Log
+
+![Audit Log](lab_4/screenshots/audit-log.png)
+
+### Functional Test Results
+
+![Functional Test Results](lab_4/screenshots/test-results.png)
+
+---
 
 # Functional Test Results
 
