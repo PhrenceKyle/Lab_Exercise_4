@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Returns | Laboratory Staff</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/forms.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="app-sidebar" class="sidebar"></aside>
+
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button id="btn-mobile-menu" class="mobile-menu-btn" aria-label="Toggle menu">&#9776;</button>
+                    <nav class="header-breadcrumbs">
+                        <a href="../../dashboard.html">Laboratory</a>
+                        <span class="separator">/</span>
+                        <a href="../../dashboard.html">Staff</a>
+                        <span class="separator">/</span>
+                        <span id="header-breadcrumb-current" class="current">Process Returns</span>
+                    </nav>
+                </div>
+                <div class="header-actions">
+                    <div id="header-conn-status"></div>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="page-title-row">
+                    <div>
+                        <h1>Process Equipment Returns</h1>
+                        <p>Verify returning assets, assess hardware condition, and synchronize inventory availability (BR-A4-06, BR-A4-08).</p>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-toolbar">
+                        <div class="toolbar-search">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="returns-search" placeholder="Search by requester or asset code...">
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Transaction ID</th>
+                                    <th>Borrower</th>
+                                    <th>Equipment Asset</th>
+                                    <th>Release Date</th>
+                                    <th>Expected Return</th>
+                                    <th>Current State</th>
+                                    <th class="actions-col">Inspection &amp; Return</th>
+                                </tr>
+                            </thead>
+                            <tbody id="returns-table-body">
+                                <tr><td colspan="7" class="empty-state">Loading active borrowings...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="../../js/app.js?v=2.6"></script>
+</body>
+</html>

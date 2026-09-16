@@ -1,0 +1,159 @@
+/* =====================================================================
+   LABORATORY ASSET AND SERVICE MANAGEMENT SYSTEM
+   Laboratory 4, Section A: Role-Based Asset Transaction and Approval Management
+   Responsive Media Queries & Print Styles
+   ===================================================================== */
+
+/* Mobile Menu Toggle Button (Hidden on Desktop) */
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--primary-800);
+    font-size: 1.35rem;
+    cursor: pointer;
+    padding: 0.35rem;
+    border-radius: var(--radius-sm);
+    line-height: 1;
+}
+
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 95;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+/* Tablet & Smaller Screens (< 1024px) */
+@media (max-width: 1024px) {
+    .sidebar {
+        position: fixed;
+        left: -280px;
+        top: 0;
+        bottom: 0;
+        height: 100vh;
+        box-shadow: var(--shadow-xl);
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .mobile-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+
+    .mobile-menu-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .content-body {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+    }
+}
+
+/* Mobile Screens (< 768px) */
+@media (max-width: 768px) {
+    .top-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .header-breadcrumbs {
+        display: none; /* Conserve space on mobile */
+    }
+
+    .content-body {
+        padding: 1.25rem 0.85rem;
+    }
+
+    .page-title-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .table-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .toolbar-search {
+        min-width: 100%;
+    }
+
+    .toolbar-filters {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .filter-select {
+        flex: 1;
+    }
+
+    .demo-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-dialog {
+        margin: 0.5rem;
+        max-height: 95vh;
+    }
+}
+
+/* Print Stylesheet for Reports & Audits */
+@media print {
+    .sidebar,
+    .top-header,
+    .table-toolbar,
+    .table-pagination,
+    .btn,
+    .mobile-menu-btn,
+    .toast-container,
+    .modal-backdrop {
+        display: none !important;
+    }
+
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    .app-layout,
+    .main-wrapper,
+    .content-body {
+        display: block !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .table-card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .data-table th,
+    .data-table td {
+        border-color: #cccccc !important;
+        padding: 0.5rem !important;
+        font-size: 0.75rem !important;
+    }
+
+    .badge {
+        border: 1px solid #999999 !important;
+        background: transparent !important;
+        color: #000000 !important;
+    }
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Requests | Requester Portal</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/forms.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="app-sidebar" class="sidebar"></aside>
+
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button id="btn-mobile-menu" class="mobile-menu-btn" aria-label="Toggle menu">&#9776;</button>
+                    <nav class="header-breadcrumbs">
+                        <a href="../../dashboard.html">Laboratory</a>
+                        <span class="separator">/</span>
+                        <a href="../../dashboard.html">Requester</a>
+                        <span class="separator">/</span>
+                        <span id="header-breadcrumb-current" class="current">My Requests</span>
+                    </nav>
+                </div>
+                <div class="header-actions">
+                    <div id="header-conn-status"></div>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="page-title-row">
+                    <div>
+                        <h1>My Active Equipment Requests</h1>
+                        <p>Track the approval status and active borrowing timelines of your requested assets.</p>
+                    </div>
+                    <a href="./request.html" class="btn btn-primary">
+                        <span>➕ Request Equipment</span>
+                    </a>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>Equipment Asset</th>
+                                    <th>Purpose</th>
+                                    <th>Requested On</th>
+                                    <th>Expected Due Date</th>
+                                    <th>Status</th>
+                                    <th class="actions-col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="my-requests-table-body">
+                                <tr><td colspan="6" class="empty-state">Loading your active requests...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="../../js/app.js?v=2.6"></script>
+</body>
+</html>

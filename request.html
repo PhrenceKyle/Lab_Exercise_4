@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Equipment | Requester Portal</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/forms.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="app-sidebar" class="sidebar"></aside>
+
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button id="btn-mobile-menu" class="mobile-menu-btn" aria-label="Toggle menu">&#9776;</button>
+                    <nav class="header-breadcrumbs">
+                        <a href="../../dashboard.html">Laboratory</a>
+                        <span class="separator">/</span>
+                        <a href="../../dashboard.html">Requester</a>
+                        <span class="separator">/</span>
+                        <span id="header-breadcrumb-current" class="current">Submit Request</span>
+                    </nav>
+                </div>
+                <div class="header-actions">
+                    <div id="header-conn-status"></div>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="page-title-row">
+                    <div>
+                        <h1>Submit Borrowing Request</h1>
+                        <p>Request laboratory equipment for academic experiments, coursework, or official department research.</p>
+                    </div>
+                </div>
+
+                <div style="max-width: 680px; margin: 0 auto;">
+                    <div class="table-card">
+                        <div class="table-toolbar">
+                            <h3 style="font-size: 1.05rem; margin: 0;">Equipment Requisition Form</h3>
+                            <span class="badge badge-pending">Initial Status: Pending</span>
+                        </div>
+                        <div style="padding: 2rem;">
+                            <form id="borrowing-requisition-form">
+                                <div class="form-group">
+                                    <label class="form-label required" for="req-equipment-select">Select Equipment Asset</label>
+                                    <select id="req-equipment-select" class="form-select" required>
+                                        <option value="">Loading available assets...</option>
+                                    </select>
+                                    <div class="form-help">
+                                        Per <strong>BR-A4-01 &amp; BR-A4-09</strong>, only currently Available equipment can be selected. Equipment under maintenance or borrowed cannot be requested.
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label required" for="req-purpose">Academic / Research Purpose</label>
+                                    <textarea id="req-purpose" class="form-textarea" placeholder="Detail the laboratory course, experiment number, faculty project, or official activity..." required></textarea>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Request Date</label>
+                                        <input type="text" class="form-control" value="Today (Auto-assigned)" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label required" for="req-return-date">Expected Return Date</label>
+                                        <input type="date" id="req-return-date" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div style="background: var(--primary-50); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.85rem 1rem; margin: 1.5rem 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+                                    <strong>Workflow Notice:</strong> Upon submission, this request enters the <code>Pending</code> queue. An Administrator must review and approve it before laboratory staff can release the physical equipment.
+                                </div>
+
+                                <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+                                    <a href="./equipment.html" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" id="btn-submit-request" class="btn btn-primary">
+                                        Submit Borrowing Request
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="../../js/app.js?v=2.6"></script>
+</body>
+</html>

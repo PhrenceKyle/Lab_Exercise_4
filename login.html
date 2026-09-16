@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Laboratory Asset & Service Management System</title>
+    <meta name="description" content="Secure authentication portal for Laboratory Asset and Service Management System.">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/forms.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="login-page">
+
+    <div class="login-card">
+        <header class="login-header">
+            <div class="login-badge-icon">🔬</div>
+            <h2>LabAsset Management</h2>
+            <p>Role-Based Asset Transaction and Approval Management</p>
+        </header>
+
+        <main class="login-body">
+            <div style="border-bottom: 2px solid var(--border-color); margin-bottom: 1.25rem; padding-bottom: 0.65rem;">
+                <strong style="color: var(--brand-blue);">Sign In</strong>
+            </div>
+
+            <!-- Error Banner -->
+            <div id="login-error-alert" class="access-denied-container" style="display: none; padding: 0.85rem; margin: 0 0 1.25rem; font-size: 0.85rem; color: var(--color-damaged); background: var(--bg-damaged); border: 1px solid var(--border-damaged); text-align: left;"></div>
+
+            <!-- Success Banner -->
+            <div id="login-success-alert" style="display: none; padding: 0.85rem; margin: 0 0 1.25rem; font-size: 0.85rem; color: var(--color-available); background: var(--bg-available); border: 1px solid var(--border-available); text-align: left; border-radius: 6px;"></div>
+
+            <!-- Sign In Form -->
+            <form id="login-form" novalidate>
+                <div class="form-group">
+                    <label class="form-label required" for="login-email">Email Address</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="name@lab.edu" required autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label required" for="login-password">Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+
+                <button type="submit" id="login-submit-btn" class="btn btn-primary" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem; font-size: 0.95rem;">
+                    <span>Sign In to Portal</span>
+                </button>
+            </form>
+
+        </main>
+
+        <footer class="login-footer">
+            <div>Department of Systems Analysis and Design &bull; Laboratory 4, Section A</div>
+            <div style="margin-top: 0.35rem; color: var(--text-light);">Protected by Supabase Authentication &amp; PostgreSQL RLS</div>
+        </footer>
+    </div>
+
+    <!-- Scripts with Cache Buster -->
+    <script type="module" src="./js/app.js?v=2.7"></script>
+</body>
+</html>

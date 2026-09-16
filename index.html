@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratory Asset and Service Management System</title>
+    <meta name="description" content="Role-Based Asset Transaction and Approval Management System for academic and scientific laboratories.">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/forms.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: radial-gradient(circle at 50% 20%, #1e293b 0%, #0f172a 100%); color: #ffffff;">
+    <div style="text-align: center; max-width: 460px; padding: 2.5rem; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg); backdrop-filter: blur(8px); box-shadow: var(--shadow-xl);">
+        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-blue), #38bdf8); border-radius: var(--radius-md); margin: 0 auto 1.25rem; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+            🔬
+        </div>
+        <h1 style="color: #ffffff; font-size: 1.5rem; margin-bottom: 0.5rem;">LabAsset Pro</h1>
+        <p style="color: #94a3b8; font-size: 0.875rem; margin-bottom: 1.75rem;">
+            Systems Analysis & Design — Laboratory 4, Section A<br>
+            Role-Based Asset Transaction and Approval Management
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <a href="./login.html" class="btn btn-primary" style="background: var(--brand-blue); border: none; padding: 0.75rem;">
+                Open Application Portal
+            </a>
+            <a href="./documentation/workflow.md" class="btn btn-secondary" style="background: transparent; color: #cbd5e1; border-color: rgba(255,255,255,0.2);">
+                View System Documentation
+            </a>
+        </div>
+        <div style="margin-top: 1.5rem; font-size: 0.75rem; color: #64748b;">
+            Connecting to session environment...
+        </div>
+    </div>
+
+    <script type="module">
+        import { session } from "./js/session.js";
+        if (session.isAuthenticated()) {
+            window.location.replace("./dashboard.html");
+        } else {
+            // Give brief moment if user clicked manually or let them redirect
+            setTimeout(() => {
+                if (!session.isAuthenticated()) {
+                    window.location.replace("./login.html");
+                }
+            }, 800);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Laboratory Asset & Service Management System</title>
+    <meta name="description" content="Centralized operational dashboard for laboratory assets, borrowing transactions, and approvals.">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/forms.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Dynamic Role-Based Sidebar Navigation -->
+        <aside id="app-sidebar" class="sidebar"></aside>
+
+        <div class="main-wrapper">
+            <!-- Header Bar -->
+            <header class="top-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button id="btn-mobile-menu" class="mobile-menu-btn" aria-label="Toggle navigation menu">&#9776;</button>
+                    <nav class="header-breadcrumbs">
+                        <span>Laboratory</span>
+                        <span class="separator">/</span>
+                        <span id="header-breadcrumb-current" class="current">Dashboard</span>
+                    </nav>
+                </div>
+                <div class="header-actions">
+                    <div id="header-conn-status"></div>
+                </div>
+            </header>
+
+            <!-- Main Content Body -->
+            <main class="content-body">
+                <div class="page-title-row">
+                    <div>
+                        <h1 id="dash-main-title">System Dashboard</h1>
+                        <p id="dash-main-subtitle">Real-time equipment availability, borrowing requests, and laboratory operational metrics.</p>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- VIEW 1: ADMINISTRATOR & STAFF DASHBOARD                   -->
+                <!-- ========================================================= -->
+                <div id="admin-staff-dashboard-view">
+                    <!-- KPI Metrics Cards Grid -->
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon blue">💻</div>
+                            <div class="metric-details">
+                                <div class="metric-value" id="kpi-total-equipment">0</div>
+                                <div class="metric-label">Total Equipment</div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon green">✓</div>
+                            <div class="metric-details">
+                                <div class="metric-value" id="kpi-available-equipment">0</div>
+                                <div class="metric-label">Available Equipment</div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon purple">📦</div>
+                            <div class="metric-details">
+                                <div class="metric-value" id="kpi-borrowed-equipment">0</div>
+                                <div class="metric-label">Borrowed Assets</div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon amber">⏳</div>
+                            <div class="metric-details">
+                                <div class="metric-value" id="kpi-pending-requests">0</div>
+                                <div class="metric-label">Pending Requests</div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon red">⚠️</div>
+                            <div class="metric-details">
+                                <div class="metric-value" id="kpi-overdue-transactions">0</div>
+                                <div class="metric-label">Overdue Items</div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon slate">🔧</div>
+                            <div class="metric-details">
+                                <div class="metric-value" id="kpi-maintenance-equipment">0</div>
+                                <div class="metric-label">In Maintenance</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Split Dashboard Section: Recent Requests & Activity Feed -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem;">
+                        <!-- Recent Requests Card -->
+                        <div class="table-card">
+                            <div class="table-toolbar">
+                                <h3 style="font-size: 1rem; margin: 0;">Recent Borrowing Requests</h3>
+                                <a id="link-view-all-borrowing" href="./pages/admin/borrowing.html" class="btn btn-sm btn-secondary">View All</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Asset</th>
+                                            <th>Requester</th>
+                                            <th>Requested</th>
+                                            <th>Expected Return</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dash-recent-requests-body">
+                                        <tr><td colspan="5" class="empty-state">Loading recent records...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity Stream Card -->
+                        <div class="table-card">
+                            <div class="table-toolbar">
+                                <h3 style="font-size: 1rem; margin: 0;">Live Audit Stream (BR-A4-10)</h3>
+                                <a href="./pages/admin/audit-logs.html" class="btn btn-sm btn-secondary">Audit Trail</a>
+                            </div>
+                            <div style="padding: 1rem 1.5rem;" id="dash-audit-stream-body">
+                                <div class="empty-state">Loading audit feed...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- VIEW 2: REQUESTER DASHBOARD (LIVE CATALOG & DIRECT ACTION) -->
+                <!-- ========================================================= -->
+                <div id="requester-dashboard-view" style="display: none;">
+                    <!-- Requester KPI Metrics -->
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon green">✓</div>
+                            <div class="metric-details">
+                                <div class="metric-value" id="kpi-req-available">0</div>
+                                <div class="metric-label">Available Equipment</div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon amber">⏳</div>
+                            <div class="metric-details">
+                                <div class="metric-value" id="kpi-req-pending">0</div>
+                                <div class="metric-label">My Pending Approvals</div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon purple">📦</div>
+                            <div class="metric-details">
+                                <div class="metric-value" id="kpi-req-active">0</div>
+                                <div class="metric-label">My Borrowed Assets</div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon blue">📋</div>
+                            <div class="metric-details">
+                                <div class="metric-value" id="kpi-req-history">0</div>
+                                <div class="metric-label">Completed Returns</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Available Equipment Table Card -->
+                    <div class="table-card" style="margin-bottom: 2rem;">
+                        <div class="table-toolbar" style="flex-wrap: wrap; gap: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <h3 style="font-size: 1.1rem; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span>🔬 Available Laboratory Equipment</span>
+                                    <span class="badge badge-available" style="font-size: 0.68rem; font-weight: 600;">● Live Supabase Sync</span>
+                                </h3>
+                            </div>
+                            <div class="toolbar-filters" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                                <div class="toolbar-search" style="margin: 0;">
+                                    <span class="search-icon">🔍</span>
+                                    <input type="text" id="dash-req-search" placeholder="Search by asset code, name, location..." style="min-width: 240px;">
+                                </div>
+                                <select id="dash-req-category" class="filter-select">
+                                    <option value="">All Categories</option>
+                                    <option value="Laptops">Laptops</option>
+                                    <option value="Projectors">Projectors</option>
+                                    <option value="Monitors">Monitors</option>
+                                    <option value="Cameras">Cameras</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="IoT / Embedded">IoT / Embedded</option>
+                                </select>
+                                <select id="dash-req-status" class="filter-select">
+                                    <option value="Available" selected>Available Only</option>
+                                    <option value="">All Statuses</option>
+                                    <option value="Borrowed">Borrowed</option>
+                                    <option value="Maintenance">Maintenance</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Asset Code</th>
+                                        <th>Equipment Name &amp; Description</th>
+                                        <th>Category</th>
+                                        <th>Storage Location</th>
+                                        <th>Condition</th>
+                                        <th>Available Qty</th>
+                                        <th>Status</th>
+                                        <th class="actions-col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dash-req-equipment-body">
+                                    <tr><td colspan="8" class="empty-state">Loading available equipment catalog from Supabase...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- My Active Requests Card -->
+                    <div class="table-card">
+                        <div class="table-toolbar">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <h3 style="font-size: 1.05rem; margin: 0;">📋 My Active Borrowing Requests</h3>
+                            </div>
+                            <a href="./pages/requester/my-requests.html" class="btn btn-sm btn-secondary">Full Request List</a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Request ID</th>
+                                        <th>Equipment Asset</th>
+                                        <th>Purpose</th>
+                                        <th>Requested On</th>
+                                        <th>Expected Due Date</th>
+                                        <th>Approval Status</th>
+                                        <th class="actions-col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dash-req-my-requests-body">
+                                    <tr><td colspan="7" class="empty-state">Loading your active requests...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- My Borrowed Equipment Card -->
+                    <div class="table-card" style="margin-top: 2rem;">
+                        <div class="table-toolbar">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <h3 style="font-size: 1.05rem; margin: 0;">📦 My Borrowed Equipment</h3>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Asset Code</th>
+                                        <th>Equipment</th>
+                                        <th>Status</th>
+                                        <th>Approved On</th>
+                                        <th>Expected Due Date</th>
+                                        <th class="actions-col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dash-req-borrowed-body">
+                                    <tr><td colspan="6" class="empty-state">Loading your borrowed equipment...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts with Cache Buster -->
+    <script type="module" src="./js/app.js?v=2.6"></script>
+</body>
+</html>

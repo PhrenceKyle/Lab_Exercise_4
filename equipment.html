@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Directory | Laboratory Staff</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/forms.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="app-sidebar" class="sidebar"></aside>
+
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button id="btn-mobile-menu" class="mobile-menu-btn" aria-label="Toggle menu">&#9776;</button>
+                    <nav class="header-breadcrumbs">
+                        <a href="../../dashboard.html">Laboratory</a>
+                        <span class="separator">/</span>
+                        <a href="../../dashboard.html">Staff</a>
+                        <span class="separator">/</span>
+                        <span id="header-breadcrumb-current" class="current">Equipment Directory</span>
+                    </nav>
+                </div>
+                <div class="header-actions">
+                    <div id="header-conn-status"></div>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="page-title-row">
+                    <div>
+                        <h1>Laboratory Equipment Directory</h1>
+                        <p>Real-time asset availability, locations, hardware specifications, and conditions.</p>
+                    </div>
+                    <button id="btn-add-equipment" class="btn btn-primary">
+                        <span>➕ Add Equipment</span>
+                    </button>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-toolbar">
+                        <div class="toolbar-search">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="equipment-search" placeholder="Search equipment by code, name, location...">
+                        </div>
+                        <div class="toolbar-filters">
+                            <select id="equipment-category-filter" class="filter-select">
+                                <option value="">All Categories</option>
+                                <option value="Laptops">Laptops</option>
+                                <option value="Projectors">Projectors</option>
+                                <option value="Monitors">Monitors</option>
+                                <option value="Cameras">Cameras</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="IoT / Embedded">IoT / Embedded</option>
+                            </select>
+
+                            <select id="equipment-status-filter" class="filter-select">
+                                <option value="">All Statuses</option>
+                                <option value="Available">Available</option>
+                                <option value="Borrowed">Borrowed</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Damaged">Damaged</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Asset Code</th>
+                                    <th>Equipment Name &amp; Description</th>
+                                    <th>Category</th>
+                                    <th>Storage Location</th>
+                                    <th>Condition</th>
+                                    <th>Status</th>
+                                    <th>Quantity / Serial</th>
+                                    <th class="actions-col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="equipment-table-body">
+                                <tr><td colspan="8" class="empty-state">Loading equipment directory...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="../../js/app.js?v=2.6"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports & Analytics | Laboratory Asset System</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/forms.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="app-sidebar" class="sidebar"></aside>
+
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button id="btn-mobile-menu" class="mobile-menu-btn" aria-label="Toggle menu">&#9776;</button>
+                    <nav class="header-breadcrumbs">
+                        <a href="../../dashboard.html">Laboratory</a>
+                        <span class="separator">/</span>
+                        <a href="../../dashboard.html">Admin</a>
+                        <span class="separator">/</span>
+                        <span id="header-breadcrumb-current" class="current">Reports</span>
+                    </nav>
+                </div>
+                <div class="header-actions">
+                    <div id="header-conn-status"></div>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="page-title-row">
+                    <div>
+                        <h1>Asset Reports &amp; Utilization Analytics</h1>
+                        <p>Laboratory equipment efficiency, category distribution, and borrowing summary report.</p>
+                    </div>
+                    <button id="btn-print-report" class="btn btn-secondary">
+                        <span>🖨️ Print / Export PDF</span>
+                    </button>
+                </div>
+
+                <!-- Metrics Summary -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon blue">💻</div>
+                        <div class="metric-details">
+                            <div class="metric-value" id="rep-total-equip">0</div>
+                            <div class="metric-label">Total Inventory Assets</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon purple">📈</div>
+                        <div class="metric-details">
+                            <div class="metric-value" id="rep-util-rate">0%</div>
+                            <div class="metric-label">Asset Utilization Rate</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon green">✓</div>
+                        <div class="metric-details">
+                            <div class="metric-value" id="rep-avail-rate">0%</div>
+                            <div class="metric-label">Available Capacity</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon red">⚠️</div>
+                        <div class="metric-details">
+                            <div class="metric-value" id="rep-overdue-count">0</div>
+                            <div class="metric-label">Overdue Occurrences</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon slate">👥</div>
+                        <div class="metric-details">
+                            <div class="metric-value" id="rep-total-users">0</div>
+                            <div class="metric-label">Registered Users</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                    <!-- Category Breakdown -->
+                    <div class="table-card">
+                        <div class="table-toolbar">
+                            <h3 style="font-size: 1rem; margin: 0;">Equipment Category Distribution</h3>
+                        </div>
+                        <div style="padding: 1.5rem;" id="category-breakdown-body">
+                            <div class="empty-state">Loading category data...</div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Summary -->
+                    <div class="table-card">
+                        <div class="table-toolbar">
+                            <h3 style="font-size: 1rem; margin: 0;">Operational Activity Snapshot</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Asset</th>
+                                        <th>Requester</th>
+                                        <th>Date</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reports-recent-summary">
+                                    <tr><td colspan="5" class="empty-state">Loading transactions...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="../../js/app.js?v=2.6"></script>
+</body>
+</html>

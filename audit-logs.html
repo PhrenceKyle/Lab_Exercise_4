@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Audit Logs | Laboratory Asset System</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/forms.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="app-sidebar" class="sidebar"></aside>
+
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button id="btn-mobile-menu" class="mobile-menu-btn" aria-label="Toggle menu">&#9776;</button>
+                    <nav class="header-breadcrumbs">
+                        <a href="../../dashboard.html">Laboratory</a>
+                        <span class="separator">/</span>
+                        <a href="../../dashboard.html">Admin</a>
+                        <span class="separator">/</span>
+                        <span id="header-breadcrumb-current" class="current">Audit Trail</span>
+                    </nav>
+                </div>
+                <div class="header-actions">
+                    <div id="header-conn-status"></div>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="page-title-row">
+                    <div>
+                        <h1>Security &amp; Operational Audit Trail</h1>
+                        <p>Immutable system event logs recorded for compliance, traceability, and authorization auditing (BR-A4-10).</p>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-toolbar">
+                        <div class="toolbar-search">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="audit-search" placeholder="Search user, description, action or record ID...">
+                        </div>
+                        <div class="toolbar-filters">
+                            <select id="audit-action-filter" class="filter-select">
+                                <option value="">All Actions</option>
+                                <option value="APPROVED">APPROVED</option>
+                                <option value="REJECTED">REJECTED</option>
+                                <option value="RELEASED">RELEASED</option>
+                                <option value="RETURNED">RETURNED</option>
+                                <option value="CREATE_BORROWING_REQUEST">CREATE_BORROWING_REQUEST</option>
+                                <option value="CREATE_EQUIPMENT">CREATE_EQUIPMENT</option>
+                                <option value="UPDATE_EQUIPMENT">UPDATE_EQUIPMENT</option>
+                                <option value="DELETE_EQUIPMENT">DELETE_EQUIPMENT</option>
+                                <option value="MAINTENANCE_ACTION">MAINTENANCE_ACTION</option>
+                                <option value="CHANGE_USER_STATUS">CHANGE_USER_STATUS</option>
+                                <option value="LOGIN">LOGIN</option>
+                                <option value="LOGOUT">LOGOUT</option>
+                                <option value="ACCESS_DENIED">ACCESS_DENIED</option>
+                            </select>
+
+                            <select id="audit-module-filter" class="filter-select">
+                                <option value="">All Modules</option>
+                                <option value="Borrowing">Borrowing</option>
+                                <option value="Equipment">Equipment</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Users">Users</option>
+                                <option value="Auth">Auth</option>
+                                <option value="Security">Security</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Audit ID</th>
+                                    <th>User</th>
+                                    <th>Action</th>
+                                    <th>Module</th>
+                                    <th>Record ID</th>
+                                    <th>Event Description</th>
+                                    <th>Timestamp</th>
+                                </tr>
+                            </thead>
+                            <tbody id="audit-table-body">
+                                <tr><td colspan="7" class="empty-state">Loading audit trail...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-pagination">
+                        <div id="audit-total-count">Showing audit records</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">Audit records are read-only and immutable.</div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="../../js/app.js?v=2.6"></script>
+</body>
+</html>

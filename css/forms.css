@@ -1,0 +1,227 @@
+/* =====================================================================
+   LABORATORY ASSET AND SERVICE MANAGEMENT SYSTEM
+   Laboratory 4, Section A: Role-Based Asset Transaction and Approval Management
+   Forms, Inputs, Validation States & Login Portal Styles
+   ===================================================================== */
+
+/* Form Group & Controls */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.825rem;
+    font-weight: 600;
+    color: var(--primary-700);
+    margin-bottom: 0.4rem;
+}
+
+.form-label.required::after {
+    content: " *";
+    color: var(--color-damaged);
+}
+
+.form-control,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 0.625rem 0.85rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+    color: var(--primary-900);
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    outline: none;
+}
+
+.form-control:focus,
+.form-select:focus,
+.form-textarea:focus {
+    border-color: var(--brand-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.form-control::placeholder,
+.form-textarea::placeholder {
+    color: var(--text-light);
+}
+
+.form-control:disabled,
+.form-select:disabled,
+.form-textarea:disabled {
+    background-color: var(--primary-50);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    border-color: var(--border-color);
+}
+
+.form-textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.form-help {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.35rem;
+}
+
+.form-error {
+    font-size: 0.775rem;
+    color: var(--color-damaged);
+    margin-top: 0.35rem;
+    display: none;
+}
+
+.form-group.has-error .form-control,
+.form-group.has-error .form-select,
+.form-group.has-error .form-textarea {
+    border-color: var(--color-damaged);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.form-group.has-error .form-error {
+    display: block;
+}
+
+/* Form Layout Grids */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+}
+
+/* Radio & Checkbox Styles */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--primary-800);
+}
+
+.form-check input[type="radio"],
+.form-check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--brand-blue);
+}
+
+/* Login Portal Page Styles */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 20%, #1e293b 0%, #0f172a 100%);
+    padding: 2rem 1rem;
+}
+
+.login-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 480px;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-header {
+    background: var(--primary-900);
+    padding: 2.25rem 2rem 1.75rem;
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.login-badge-icon {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, var(--brand-blue), #38bdf8);
+    border-radius: var(--radius-md);
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.35);
+}
+
+.login-header h2 {
+    color: #ffffff;
+    font-size: 1.35rem;
+    margin-bottom: 0.35rem;
+}
+
+.login-header p {
+    color: #94a3b8;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.login-body {
+    padding: 2rem;
+}
+
+/* Quick Fill Demo Role Switcher */
+.demo-accounts-panel {
+    background: var(--primary-50);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+.demo-title {
+    font-size: 0.725rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary-600);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.demo-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.btn-demo-fill {
+    padding: 0.4rem 0.3rem;
+    font-size: 0.725rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    background: #ffffff;
+    color: var(--primary-800);
+    cursor: pointer;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.btn-demo-fill:hover {
+    border-color: var(--brand-blue);
+    background: var(--brand-blue-light);
+    color: var(--brand-blue);
+}
+
+.login-footer {
+    padding: 1rem 2rem 1.5rem;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    background: #fafafa;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}

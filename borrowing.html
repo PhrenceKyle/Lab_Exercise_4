@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrowing Operations | Laboratory Staff</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/forms.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="app-sidebar" class="sidebar"></aside>
+
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button id="btn-mobile-menu" class="mobile-menu-btn" aria-label="Toggle menu">&#9776;</button>
+                    <nav class="header-breadcrumbs">
+                        <a href="../../dashboard.html">Laboratory</a>
+                        <span class="separator">/</span>
+                        <a href="../../dashboard.html">Staff</a>
+                        <span class="separator">/</span>
+                        <span id="header-breadcrumb-current" class="current">Borrowing Operations</span>
+                    </nav>
+                </div>
+                <div class="header-actions">
+                    <div id="header-conn-status"></div>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="page-title-row">
+                    <div>
+                        <h1>Operational Borrowing &amp; Equipment Releases</h1>
+                        <p>Release approved equipment to requesters and monitor active laboratory transactions.</p>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-toolbar">
+                        <div class="toolbar-search">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="borrowing-search" placeholder="Search by requester, asset code or purpose...">
+                        </div>
+                        <div class="toolbar-filters">
+                            <select id="borrowing-status-filter" class="filter-select">
+                                <option value="">All Statuses</option>
+                                <option value="Approved" selected>Approved (Ready to Release)</option>
+                                <option value="Released">Active (Released)</option>
+                                <option value="Overdue">Overdue</option>
+                                <option value="Pending">Pending Admin Approval</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>Requester</th>
+                                    <th>Equipment Asset</th>
+                                    <th>Purpose</th>
+                                    <th>Request Date</th>
+                                    <th>Expected Return</th>
+                                    <th>Status</th>
+                                    <th class="actions-col">Operational Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-borrowing-table-body">
+                                <tr><td colspan="8" class="empty-state">Loading transactions...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="../../js/app.js?v=2.6"></script>
+</body>
+</html>
